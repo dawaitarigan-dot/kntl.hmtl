@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>RAGAM4D FREEBET</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@500;700&display=swap');
+
+  :root {
+    --pink: #ff2d78;
+    --pink2: #ff80b0;
+    --gold: #ffd700;
+    --dark: #0a0010;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Rajdhani', sans-serif;
+    text-align: center;
+    color: #fff;
+    min-height: 100vh;
+    background: url('https://i.ibb.co/Z1fxf1sG/image.png') no-repeat center center fixed;
+    background-size: cover;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 0, 20, 0.65);
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    padding: 20px 16px 40px;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  /* ===== ANIMASI JUDUL PINK ===== */
+  @keyframes pinkGlow {
+    0%   { color: #ffffff; text-shadow: 0 0 10px #ffffff, 0 0 30px #ffffff; }
+    25%  { color: #ffffff; text-shadow: 0 0 20px #ffffff, 0 0 50px #ffffff; }
+    75%  { color: #fae452; text-shadow: 0 0 25px #fae452, 0 0 60px #ffffff; }
+    100% { color: #ffffff; text-shadow: 0 0 10px #ffffff, 0 0 30px #ffffff; }
+  }
+
+  @keyframes floatTitle {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-5px); }
+  }
+
+  .header {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 35px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    animation: pinkGlow 0.5s ease-in-out infinite, floatTitle 3s ease-in-out infinite;
+    margin-bottom: 15px;
+    padding-top: 18px;
+  }
+
+  .subheader {
+    font-size: 20px;
+    color: #ffffff;
+    letter-spacing: 1px;
+    margin-bottom: 22px;
+    opacity: 0.85;
+	animation: blackGlow 0.5s ease-in-out infinite, floatTitle 3s ease-in-out infinite;
+  }
+
+  /* ===== KOTAK INPUT ===== */
+  .input-section {
+    background: #0a0a0a;
+    border: 1.5px solid #ffffff;
+    border-radius: 90px;
+    padding: 20px 30px;
+    margin-bottom: 25px;
+    backdrop-filter: blur(10px);
+  }
+
+  .input-label {
+    font-size: 12px;
+    letter-spacing: 5px;
+    color: #ffffff;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .input-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  #userid {
+    flex: 1;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1.5px solid #ffffff;
+    background: rgba(0, 0, 0, 0.1);
+    color: #ffffff;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    outline: none;
+    transition: border-color 0.5s;
+  }
+
+  #userid:focus {
+    border-color: #ffffff;
+    box-shadow: 0 0 12px #ffffff;
+  }
+
+  #userid::placeholder { color: rgba(235,235,235,0.25); }
+
+  .clear-btn {
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1.5px solid #ffffff;
+    background: rgba(225,225,225,0.15);
+    color: #ffffff;
+    font-size: 13px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .clear-btn:hover {
+    background: rgba(255,45,120,0.3);
+    color: #fff;
+  }
+
+  /* ===== KOTAK RODA ===== */
+  .wheel-section {
+    background: #0a0a0a;
+    border: 1.5px solid #ffffff;
+    border-radius: 65px;
+    padding: 24px 20px 22px;
+    backdrop-filter: blur(10px);
+    margin-bottom: 10px;
+  }
+
+  .wheel-label {
+    font-size: 17px;
+    letter-spacing: 5px;
+    color: #fae452;
+    text-transform: uppercase;
+    margin-bottom: 38px;
+    opacity: 10;
+  }
+
+  #wheelBox {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+
+  #pointer {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: -20px;
+    width: 0;
+    height: 0;
+    border-left: 14px solid transparent;
+    border-right: 14px solid transparent;
+    border-top: 30px solid #fae452;
+    z-index: 10;
+    filter: drop-shadow(0 0 5px #0a0a0a);
+  }
+
+  #wheel {
+    border-radius: 18%;
+    box-shadow: 0 0 5px #ffffff, 0 0 5px #ffffff;
+    display: block;
+  }
+
+  /* ===== TOMBOL SPIN ===== */
+  @keyframes pulseGold {
+     50%       { box-shadow: 0 0 15px #fae452, 0 0 30px rgba(255,215,0,0.3); }
+  }
+
+  .spin-btn {
+    width: 100%;
+    padding: 15px 40px;
+    background: linear-gradient(135deg, #fae452, #fae452);
+    border: none;
+    border-radius: 12px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #1a0a00;
+    cursor: pointer;
+    animation: pulseGold 2.5s ease-in-out infinite;
+    transition: transform 0.15s, opacity 0.3s;
+  }
+
+  .spin-btn:hover:not(:disabled) { transform: scale(1.03); }
+  .spin-btn:active:not(:disabled) { transform: scale(0.97); }
+  .spin-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    animation: none;
+  }
+
+  /* ===== POPUP ===== */
+  #popup {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0; left: 0;
+    background: rgba(0,0,0,0.88);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+
+  @keyframes popIn {
+    0%   { transform: scale(0.5); opacity: 0; }
+    70%  { transform: scale(1.07); opacity: 1; }
+    100% { transform: scale(1); }
+  }
+
+  .popup-box {
+    background: linear-gradient(160deg, #160010, #0a0020);
+    padding: 32px 28px;
+    border-radius: 20px;
+    border: 2px solid var(--gold);
+    box-shadow: 0 0 40px rgba(255,215,0,0.5), inset 0 0 30px rgba(255,215,0,0.05);
+    max-width: 320px;
+    width: 90%;
+    animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards;
+  }
+
+  .popup-icon {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .popup-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  #resultText {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 0 0 20px #ffffff, 0 0 40px #ffffff;
+    margin-bottom: 8px;
+    animation: #ffffff
+  }
+
+  .popup-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+
+  .claim-btn {
+    width: 100%;
+    padding: 13px 25px;
+    background: linear-gradient(135deg, #ffd700, #ffaa00);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #ffffff;
+    transition: transform 0.15s;
+  }
+
+  .claim-btn:hover { transform: scale(1.04); }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">RAGAM4D FREECHIP</div>
+  <div class="subheader">DAPATKAN SALDO GRATISNYA DISINI !
+</div>
+
+  <!-- KOTAK INPUT (TERPISAH) -->
+  <div class="input-section">
+    <span class="input-label">Masukkan ID Member</span>
+    <div class="input-row">
+      <input id="userid" type="text" placeholder="Contoh: RAGAM01">
+      <button class="clear-btn" onclick="document.getElementById('userid').value=''">HAPUS</button>
+    </div>
+  </div>
+
+  <!-- KOTAK RODA (TERPISAH) -->
+  <div class="wheel-section">
+    <div class="wheel-label">RODA SALDO GRATIS</div>
+
+    <div id="wheelBox">
+      <div id="pointer"></div>
+      <canvas id="wheel" width="300" height="300"></canvas>
+    </div>
+
+    <button class="spin-btn" id="spinBtn" onclick="spin()">PUTAR SEKARANG</button>
+  </div>
+
+</div>
+
+<!-- POPUP -->
+<div id="popup">
+  <div class="popup-box">
+    <div class="popup-title">SELAMAT! KAMU MENANG</div>
+    <div id="resultText"></div>
+    <div class="popup-sub">Klik tombol di bawah untuk klaim hadiah</div>
+    <button class="claim-btn" onclick="klaim()">KLIK KLAIM HADIAH</button>
+  </div>
+</div>
+
+<script>
+  const canvas = document.getElementById("wheel");
+  const ctx    = canvas.getContext("2d");
+
+  const hadiah = ["30.000", "ZONK", "30.000", "ZONK", "30.000", "ZONK", "30.000", "ZONK"];
+  const colors = [
+    "#dedcdc", "#665e5e", "#dedcdc", "#665e5e", "#dedcdc","#665e5e", "#dedcdc","#665e5e"
+  ];
+
+  const totalSlice  = hadiah.length;
+  const sliceDeg    = 360 / totalSlice;          // derajat per segmen
+  const sliceRad    = (Math.PI * 2) / totalSlice; // radian per segmen
+
+  let currentDeg = 0;
+  let isSpinning  = false;
+
+  /* ============================
+     GAMBAR RODA
+  ============================ */
+  function draw(rotateDeg) {
+    ctx.clearRect(0, 0, 300, 300);
+
+    const cx = 150, cy = 150, r = 145;
+    const offsetRad = (rotateDeg * Math.PI) / 180; // konversi ke radian untuk canvas
+
+    for (let i = 0; i < totalSlice; i++) {
+      const startAngle = sliceRad * i + offsetRad;
+      const endAngle   = sliceRad * (i + 1) + offsetRad;
+
+      // Isi segmen
+      ctx.beginPath();
+      ctx.fillStyle = colors[i];
+      ctx.moveTo(cx, cy);
+      ctx.arc(cx, cy, r, startAngle, endAngle);
+      ctx.closePath();
+      ctx.fill();
+
+      // Garis pemisah
+      ctx.beginPath();
+      ctx.strokeStyle = "rgba(255,255,255,0.25)";
+      ctx.lineWidth = 1.5;
+      ctx.moveTo(cx, cy);
+      ctx.arc(cx, cy, r, startAngle, endAngle);
+      ctx.closePath();
+      ctx.stroke();
+
+      // Teks hadiah
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(startAngle + sliceRad / 2);
+      ctx.fillStyle = "#fff";
+      ctx.font = "bold 14px Orbitron, Arial";
+      ctx.shadowColor = "rgba(0,0,0,0.7)";
+      ctx.shadowBlur = 4;
+      ctx.fillText(hadiah[i], 60, 5);
+      ctx.restore();
+    }
+
+    // Lingkaran tengah (hub)
+    ctx.beginPath();
+    ctx.arc(cx, cy, 18, 0, Math.PI * 2);
+    ctx.fillStyle = "#ffd700";
+    ctx.shadowColor = "#ffd700";
+    ctx.shadowBlur = 15;
+    ctx.fill();
+    ctx.shadowBlur = 0;
+  }
+
+  draw(0);
+
+  /* ============================
+     SPIN — LOGIKA BENAR
+  ============================ */
+  function spin() {
+    if (isSpinning) return;
+
+    const id = document.getElementById("userid").value.trim();
+    if (!id) { alert("Isi ID Member dulu!"); return; }
+
+    isSpinning = true;
+    document.getElementById("spinBtn").disabled = true;
+
+    // Pilih hadiah acak
+    const index = Math.floor(Math.random() * totalSlice);
+
+    /*
+     * KALKULASI SUDUT YANG BENAR:
+     * Pointer ada di ATAS (270 derajat jika 0=kanan, atau -90 derajat).
+     * Roda digambar mulai dari angle 0 (kanan).
+     * Pusat segmen i = (i * sliceDeg + sliceDeg/2) derajat dari posisi awal roda.
+     *
+     * Setelah roda dirotasi sebesar totalDeg,
+     * sudut asli θ pada roda akan muncul di posisi (θ + totalDeg) mod 360 di layar.
+     * Agar pusat segmen index berada di posisi pointer (270°):
+     *   (segmentCenter + totalDeg) mod 360 = 270
+     *   totalDeg = (270 - segmentCenter + 360) mod 360
+     */
+
+    const segmentCenter = index * sliceDeg + sliceDeg / 2;
+    const needed        = (270 - segmentCenter + 3600) % 360;
+
+    // Selisih dari posisi roda saat ini ke posisi yang dibutuhkan
+    const currentMod = currentDeg % 360;
+    let   spinAmount = (needed - currentMod + 360) % 360;
+
+    // Minimal putar 90 derajat agar tidak terasa aneh
+    if (spinAmount < 90) spinAmount += 360;
+
+    // Tambah 5 putaran penuh agar terlihat dramatis
+    const totalDeg = currentDeg + 360 * 5 + spinAmount;
+
+    // Durasi & easing animasi canvas
+    const duration   = 4500; // ms
+    const startTime  = performance.now();
+    const startDeg   = currentDeg;
+
+    function easeOut(t) {
+      // Cubic ease-out
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    function animate(now) {
+      const elapsed  = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easedDeg = startDeg + (totalDeg - startDeg) * easeOut(progress);
+
+      draw(easedDeg);
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        // Selesai
+        currentDeg = totalDeg;
+        draw(currentDeg);
+        showResult(index);
+      }
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  /* ============================
+     TAMPILKAN HASIL
+  ============================ */
+  function showResult(index) {
+    const win = hadiah[index];
+    document.getElementById("resultText").innerText = win;
+    document.getElementById("popup").style.display = "flex";
+  }
+
+  /* ============================
+     KLAIM
+  ============================ */
+  function klaim() {
+    window.location.href = "https://ragamnice.com/";
+  }
+</script>
+
+</body>
+</html>
